@@ -1,10 +1,12 @@
 import {configureStore, ThunkAction, Action} from '@reduxjs/toolkit';
 import chatReducer from 'reducer/chatsReducer';
+import currentChatReducer from 'reducer/currentChatReducer';
 
 
 export const store = configureStore({
   reducer: {
     chats: chatReducer,
+    currentChat: currentChatReducer,
   },
   devTools: true,
 });

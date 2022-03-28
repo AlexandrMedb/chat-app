@@ -1,10 +1,10 @@
-import {database} from './config';
-import {ref, set, push, onValue} from 'firebase/database';
+import {dbFirebase} from './config';
 
+import {ref, set, push} from 'firebase/database';
 
 
 export const writeUserData=(userId, name, email, imageUrl) =>{
-  push(ref(database, 'users/' + userId), {
+  push(ref(dbFirebase, 'users/' + userId), {
     username: name,
     email: email,
     profile_picture: imageUrl,
@@ -12,17 +12,21 @@ export const writeUserData=(userId, name, email, imageUrl) =>{
 };
 
 export const postChat=(chatName) =>{
-  push(ref(database, 'chats/'), {
+  push(ref(dbFirebase, 'chats/'), {
     chatName: chatName,
   });
 };
 
-export const postMessage=(chatName) =>{
-  push(ref(database, 'chats/'), {
-    chatName: chatName,
+export const postMessage=(chatID, message) =>{
+  push(ref(dbFirebase, `chats/${chatID}/messages`), {
+    message,
   });
 };
 
+export const chatsFirebase = ref(dbFirebase, 'chats/');
 
+export const messageFirebase = (id)=> {
+  return ref(dbFirebase, `chats/${id}`);
+};
 
 
