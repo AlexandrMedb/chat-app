@@ -20,13 +20,14 @@ export const postChat=(chatName) =>{
 export const postMessage=(chatID, message) =>{
   push(ref(dbFirebase, `chats/${chatID}/messages`), {
     message,
+    date: new Date().toISOString(),
   });
 };
 
 export const chatsFirebase = ref(dbFirebase, 'chats/');
 
 export const messageFirebase = (id)=> {
-  return ref(dbFirebase, `chats/${id}`);
+  return ref(dbFirebase, `chats/${id}/messages`);
 };
 
 

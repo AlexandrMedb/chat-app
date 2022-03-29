@@ -18,6 +18,7 @@ import {ChatItem} from '../components/chatItem';
 import {chats} from 'interfaces/chatsInterfaces';
 import {ChatMessagesContainer} from './chatMessagesContainer';
 import {DrawerHeader} from '../components/drawerHeader';
+import {ChatHeader} from '../components/chatHeader';
 
 const drawerWidth = 240;
 
@@ -106,26 +107,36 @@ export const ChatContainer=connect(mapStateToProps)((props:props)=>{
     setOpen(false);
   };
 
+  const imgPlug=[
+    './img/1.jpeg',
+    './img/2.jpeg',
+    './img/3.jpeg',
+  ];
+
   return (
     <Box sx={{display: 'flex'}}>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
+      <AppBar sx={{background: '#fff',
+        boxShadow: '0px 1px 5px 1px rgba(34, 60, 80, 0.16);'}} position="fixed" open={open}
+      >
+
         <Toolbar>
           <IconButton
-            color="inherit"
+
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
             sx={{
               marginRight: 5,
+              color: '#54656f',
               ...(open && {display: 'none'}),
             }}
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-                        Mini variant chat {id}
-          </Typography>
+
+          <ChatHeader/>
+
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
@@ -136,8 +147,12 @@ export const ChatContainer=connect(mapStateToProps)((props:props)=>{
         </DrawerHeader>
         <Divider />
         <List>
-          {chats? Object.keys(chats).map((el)=>
-            <ChatItem key={el} text={chats[el].chatName} open={open} chatId={el}/>) : ''}
+          {chats? Object.keys(chats).map((el, i)=>
+            <ChatItem key={el} text={chats[el].chatName}
+              open={open}
+              chatId={el}
+              imgSrc={imgPlug[i]}
+            />) : ''}
         </List>
       </Drawer>
       <Box component="main" sx={{flexGrow: 1}}>

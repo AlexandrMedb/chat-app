@@ -7,6 +7,8 @@ import {RootState} from '../store/store';
 import {chatsFirebase, messageFirebase} from '../firebase/firebaseApi';
 import {ChatContainer} from '../container/chatContainer';
 import {chats, message} from 'interfaces/chatsInterfaces';
+import {ThemeProvider} from '@material-ui/core';
+import {createTheme} from '@mui/material/styles';
 
 
 const mapStateToProps=({currentChat: {id}}:RootState)=> ({id});
@@ -39,6 +41,26 @@ export const ChatsPage=connect(mapStateToProps, {setChats, setMessages} )((props
 
 
   return (
-    <ChatContainer/>
+    <ThemeProvider theme={theme}>
+      <ChatContainer/>
+    </ThemeProvider>
   );
+});
+
+const theme = createTheme({
+  typography: {
+    fontFamily: [
+      '-apple-system',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+      'Raleway',
+    ].join(','),
+  },
 });

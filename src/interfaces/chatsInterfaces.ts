@@ -1,5 +1,6 @@
 export interface message{
-    message:string
+    message:string,
+    date:string
 }
 
 export interface chat {

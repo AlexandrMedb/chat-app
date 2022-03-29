@@ -17,14 +17,11 @@ interface props {
 
 export const ChatMessagesContainer=connect(mapStateToProps )((props:props)=>{
   const {message}=props;
-
-  if (message) {
-    console.log(message?.messages);
-  }
+  console.log(message);
 
   return <Box sx={{
     height: '100vh',
-    background: '#F5F5DC',
+    background: '#efeae2',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'end',
@@ -32,8 +29,21 @@ export const ChatMessagesContainer=connect(mapStateToProps )((props:props)=>{
     <DrawerHeader/>
     <Box sx={{flexGrow: 1, p: 1, maxHeight: '100vh', overflowY: 'scroll'}}>
       {
-        message?.messages? Object.keys( message?.messages).map((el)=> <Message key={el}
-          message={el}/>,
+        message? Object.keys(message).map((el, i)=> {
+          if (i%3===0) {
+            return (
+              <Message key={el}
+                message={message[el].message} date={message[el].date} my={true}
+              />
+            );
+          }
+          return (
+            <Message key={el}
+              date={message[el].date}
+              message={message[el].message}
+            />
+          );
+        },
         ):''
       }
 

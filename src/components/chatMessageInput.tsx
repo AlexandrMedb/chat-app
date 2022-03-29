@@ -41,7 +41,7 @@ export const ChatMessageInput=connect(mapStateToProps)((props:props)=>{
         <Divider sx={{height: 28, m: 0.5}} orientation="vertical" />
         <IconButton
           onClick={handleSubmit}
-          color="primary" sx={{p: '10px'}}
+          sx={{p: '10px', color: '#54656f'}}
           aria-label="directions">
           <SendIcon />
         </IconButton>
